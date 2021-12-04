@@ -1,6 +1,5 @@
 def read_data(path):
   with open(path) as f:
-    # //commands = [line.rstrip("\n").split(" ") for line in f.readlines()]
     return [line.rstrip("\n") for line in f.readlines()]
 
 def part1(diagnosticReport: list) -> int:

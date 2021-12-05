@@ -6,7 +6,7 @@ class Board:
     self.board = board
     self.win = False
 
-  def checkNumber(self, n) -> bool:
+  def check_number(self, n) -> bool:
 
     if self.win:
       return False
@@ -15,13 +15,13 @@ class Board:
       for idxColumn,numberBoard in enumerate(row):
         if (numberBoard.number == n):
           numberBoard.marked = True
-          if self.__checkBoardRow(idxRow) or self.__checkBoardColumn(idxColumn):
+          if self.__check_board_row(idxRow) or self.__check_board_column(idxColumn):
             self.win = True
             return True
 
     return False
 
-  def getSumUnmarkedNumbers(self) -> int:
+  def get_sum_unmarked_numbers(self) -> int:
     sum = 0
     
     for row in self.board:
@@ -31,13 +31,13 @@ class Board:
 
     return sum
 
-  def __checkBoardRow(self, idxRow) -> bool:
+  def __check_board_row(self, idxRow) -> bool:
     for numberBoard in self.board[idxRow]:
       if not numberBoard.marked:
         return False
     return True
 
-  def __checkBoardColumn(self, idxColumn) -> bool:
+  def __check_board_column(self, idxColumn) -> bool:
     for column in self.board:
       if not column[idxColumn].marked:
         return False
@@ -59,8 +59,8 @@ def read_data(path):
 def part1(bingoNumbers, boards) -> int:
   for number in bingoNumbers:
     for board in boards:
-      if board.checkNumber(number):
-        return board.getSumUnmarkedNumbers() * number
+      if board.check_number(number):
+        return board.get_sum_unmarked_numbers() * number
 
 def part2(bingoNumbers, boards) -> int:
   lastBoardWin: Board = None
@@ -68,11 +68,11 @@ def part2(bingoNumbers, boards) -> int:
 
   for number in bingoNumbers:
     for board in boards:
-      if board.checkNumber(number):
+      if board.check_number(number):
         lastBoardWin = board
         lastNumberWin = number 
         
-  return lastBoardWin.getSumUnmarkedNumbers() * lastNumberWin
+  return lastBoardWin.get_sum_unmarked_numbers() * lastNumberWin
 
 if __name__ == '__main__':
   bingo = read_data('input.txt')
